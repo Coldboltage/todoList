@@ -5,7 +5,7 @@ import * as styles from "../styles/Input.module.css";
 import { TextField } from "@material-ui/core";
 
 const Input = () => {
-  const { newTask, setNewTask, submitTask, setSubmittedTask } = useContext(Context);
+  const { newTask, setNewTask, setSubmittedTask } = useContext(Context);
   return (
     <div className={styles.container}>
       <h2>To do:</h2>
