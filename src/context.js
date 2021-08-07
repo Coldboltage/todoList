@@ -6,39 +6,54 @@ const Context = React.createContext();
 const ContextProvider = ({ children }) => {
   const [data, setData] = useState(taskData);
   const [newTask, setNewTask] = useState("");
-  const [submittedTask, setSubmittedTask] = useState([]);
+  const [submittedTask, setSubmittedTask] = useState("");
 
-  const submitTask = () => {
-    console.log(`executed`);
-    setData((oldData) => {
-      if (newTask === "") {
-        return [...oldData];
-      } else {
-        let newTask = { id: oldData.length + 1, task: submittedTask };
-        return [...oldData, newTask];
-      }
-    });
-    setNewTask("");
-  };
+  // const submitTask = useCallback(() => {
+  //   console.log(`executed`);
+  //   setData((oldData) => {
+  //     if (newTask === "") {
+  //       return [...oldData];
+  //     } else {
+  //       console.log(`setData is being set`);
+  //       let newTask = { id: oldData.length + 1, task: submittedTask };
+  //       return [...oldData, newTask];
+  //     }
+  //   });
+  // }, [submittedTask, newTask]);
 
   const clearTask = () => {
-    setData([])
-  }
+    setData([]);
+  };
 
   const deleteTask = (id) => {
-      const newData = data.filter((item)=> item.id !== id)
-      setData(newData)
-  }
+    const newData = data.filter((item) => item.id !== id);
+    setData(newData);
+  };
 
-  const refreshData = () => setData(taskData)
+  const refreshData = () => setData(taskData);
 
   useEffect(() => {
-    submitTask();
+    if (submittedTask === "") {
+      console.log("blank");
+    } else {
+      setData((oldData) => {
+        console.log(submittedTask)
+        return [...oldData, { id: oldData.length + 1, task: submittedTask }];
+      });
+    }
   }, [submittedTask]);
 
   return (
     <Context.Provider
-      value={{ data, newTask, setNewTask, submitTask, setSubmittedTask,clearTask, deleteTask, refreshData }}
+      value={{
+        data,
+        newTask,
+        setNewTask,
+        setSubmittedTask,
+        clearTask,
+        deleteTask,
+        refreshData,
+      }}
     >
       {children}
     </Context.Provider>

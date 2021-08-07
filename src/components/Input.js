@@ -12,7 +12,8 @@ const Input = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(newTask);
+          console.log(`setSubmittedTask executed`);
+          console.log(newTask)
           setSubmittedTask(newTask)
         }}
       >
