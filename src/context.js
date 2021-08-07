@@ -7,19 +7,10 @@ const ContextProvider = ({ children }) => {
   const [data, setData] = useState(taskData);
   const [newTask, setNewTask] = useState("");
   const [submittedTask, setSubmittedTask] = useState("");
+  const [error, setError] = useState(null);
+  
+  const errorLimit = 8
 
-  // const submitTask = useCallback(() => {
-  //   console.log(`executed`);
-  //   setData((oldData) => {
-  //     if (newTask === "") {
-  //       return [...oldData];
-  //     } else {
-  //       console.log(`setData is being set`);
-  //       let newTask = { id: oldData.length + 1, task: submittedTask };
-  //       return [...oldData, newTask];
-  //     }
-  //   });
-  // }, [submittedTask, newTask]);
 
   const clearTask = () => {
     setData([]);
@@ -33,11 +24,11 @@ const ContextProvider = ({ children }) => {
   const refreshData = () => setData(taskData);
 
   useEffect(() => {
-    if (submittedTask === "") {
-      console.log("blank");
+    if (submittedTask.length <= 3) {
+      
     } else {
       setData((oldData) => {
-        console.log(submittedTask)
+        console.log(submittedTask);
         return [...oldData, { id: oldData.length + 1, task: submittedTask }];
       });
     }
@@ -53,6 +44,9 @@ const ContextProvider = ({ children }) => {
         clearTask,
         deleteTask,
         refreshData,
+        error,
+        errorLimit,
+        setError,
       }}
     >
       {children}
