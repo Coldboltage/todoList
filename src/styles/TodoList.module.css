@@ -1,0 +1,10 @@
+.container {
+    display: grid;
+    align-self: center;
+    min-width: 500px;
+    width: auto;
+    padding: 20px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    /* grid-template-columns: 1fr; */
+}
